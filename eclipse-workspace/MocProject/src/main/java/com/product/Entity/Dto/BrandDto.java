@@ -1,0 +1,71 @@
+package com.product.Entity.Dto;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.product.Entity.Brand;
+import com.product.Entity.Products;
+
+public class BrandDto {
+
+	private Long id;
+	private String name;
+	private List<ProductsDto> productsDto = new ArrayList<>();
+	
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+	public String getName() {
+		return this.name;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+
+
+
+
+	public static BrandDto from(Brand brand) {
+		BrandDto brandDto = new BrandDto();
+		brandDto.setId(brand.getId());
+		brandDto.setName(brand.getName());
+		brandDto.setProductsDto(brand.getProducts().stream().map(ProductsDto::from).collect(Collectors.toList()));
+		return brandDto;
+		
+		
+	}
+
+
+
+	public List<ProductsDto> getProductsDto() {
+		return productsDto;
+	}
+
+
+
+	public void setProductsDto(List<ProductsDto> productsDto) {
+		this.productsDto = productsDto;
+	}
+
+
+
+	
+}
