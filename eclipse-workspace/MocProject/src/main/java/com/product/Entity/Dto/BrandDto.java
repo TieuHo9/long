@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.product.Entity.Brand;
-import com.product.Entity.Products;
+
+import lombok.Getter;
+import lombok.Setter;
 
 public class BrandDto {
 
+	@Getter
+	@Setter
 	private Long id;
 	private String name;
 	private List<ProductsDto> productsDto = new ArrayList<>();

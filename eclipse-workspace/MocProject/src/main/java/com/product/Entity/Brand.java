@@ -1,5 +1,6 @@
 package com.product.Entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,12 +17,20 @@ import javax.persistence.Table;
 import com.product.Entity.Dto.BrandDto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @Entity
 @Table(name = "branch")
-public class Brand {
-	
+public class Brand implements Serializable{
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+@Getter
+@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -58,7 +67,7 @@ public class Brand {
 	}
 
 	public void removeProducts(Products products) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

@@ -1,5 +1,8 @@
 package com.product.Entity;
 
+
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,12 +13,21 @@ import javax.persistence.Table;
 
 import com.product.Entity.Dto.ProductsDto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+
+
 @Entity
-@Table(name = "products")
-public class Products {
+@Table(name = "product")
+public class Products implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Getter
+	@Setter
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -25,14 +37,14 @@ public class Products {
 	
 	/*public static Products from(Products productsDto) {
 		Products products = new Products();
-		products.set
+		prodlocalhost:8080/product/ucts.set
 	}*/
 	
 	 @Column(name = "name") private String name;
 	 
 	 @Column(name = "price") private int price;
 	  
-	 @Column(name = "brand_id") private int brand_id;
+	 //@Column(name = "brand_id") private int brand_id;
 	 
 	 @Column(name = "status") private String status;
 	 
@@ -81,14 +93,12 @@ public class Products {
 	}
 
 
-	public int getBrand_id() {
-		return brand_id;
-	}
-
-
-	public void setBrand_id(int brand_id) {
-		this.brand_id = brand_id;
-	}
+	/*
+	 * public int getBrand_id() { return brand_id; }
+	 * 
+	 * 
+	 * public void setBrand_id(int brand_id) { this.brand_id = brand_id; }
+	 */
 
 
 	public String getStatus() {
@@ -123,12 +133,26 @@ public class Products {
 	public static Products from(ProductsDto productsDto) {
 		Products products = new Products();
 		products.setName(productsDto.getName());
+		//products.setBrand_id(products.getBrand_id());
 		products.setPrice(productsDto.getPrice());
 		products.setStatus(productsDto.getStatus());
-		products.setSize(products.getSize());
+		products.setSize(productsDto.getSize());
 		products.setColor(productsDto.getColor());
 		return products;
 	}
+
+
+	public void add(Products products) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void remove(Products products) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

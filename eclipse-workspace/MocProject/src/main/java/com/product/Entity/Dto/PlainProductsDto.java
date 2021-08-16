@@ -1,13 +1,15 @@
 package com.product.Entity.Dto;
 
 import com.product.Entity.Brand;
-import com.product.Entity.Products;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 public class PlainProductsDto {
-
+@Getter
+@Setter
 		private Long id;
 		private String name;
 
