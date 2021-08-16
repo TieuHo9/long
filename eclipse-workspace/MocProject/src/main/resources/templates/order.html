@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<html>
+    <th:block th:include="{/head :: head}"></th:block>
+    <body>
+      <div id="wrapper" class="wrapper bg-ash">
+        <!-- Header Menu Area Start Here -->
+        <header th:replace="header :: header"></header>
+        <!-- Header Menu Area End Here -->
+        <!-- Page Area Start Here -->
+        <div class="dashboard-page-one">
+          <!-- Sidebar Area Start Here -->
+          <div th:include="sidebar :: sidebar"></div>
+          <!-- Sidebar Area End Here -->
+          <div class="dashboard-content-one">
+            <!-- Breadcubs Area Start Here -->
+            <div class="breadcrumbs-area">
+              <h3>Đơn hàng</h3>
+              <ul>
+                <li>
+                  <a href="home.html">Trang chủ</a>
+                </li>
+                <li>Danh sách đơn hàng</li>
+              </ul>
+            </div>
+            <!-- Breadcubs Area End Here -->
+            <!-- Teacher Table Area Start Here -->
+            <div class="card height-auto">
+              <div class="card-body">
+                <div class="heading-layout1">
+                  <div class="item-title">
+                    <h3>Danh sách đơn hàng</h3>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table display data-table text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>Mã đơn hàng</th>                   
+                        <th>Tên khách hàng</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Địa chỉ</th>
+                        <th>Tổng tiền</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="order : ${listOrder}">
+                      <tr>
+                        <td>${order.orderId}</td>
+                        <td>${order.userName}</td>
+                        <td>${order.phone}</td>
+                        <td>${order.email}</td>
+                        <td>${order.address}</td>
+                        <td><th:formatNumber pattern="#,##0" value="${order.totalPrice}"/> đ</td>
+                        <td>    
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                              <span class="flaticon-more-button-of-three-dots"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                              <a class="dropdown-item" href="#">
+                                <i class="fas fa-trash text-orange-dark"></i>  Xóa
+                              </a>    
+                            </div>
+                          </div>                                                               
+                        </td>
+                      </tr>
+                      </th:block>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- Teacher Table Area End Here -->
+          </div>
+        </div>
+        <!-- Page Area End Here -->
+      </div>
+       <!-- jquery-->
+        <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+        <!-- Plugins js -->
+        <script type="text/javascript" th:src="@{/js/plugins.js}"></script>
+        <!-- Popper js -->
+        <script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+        <!-- Bootstrap js -->
+        <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+        <!-- Counterup Js -->
+        <script type="text/javascript" th:src="@{/js/jquery.counterup.min.js}"></script>
+        <!-- Moment Js -->
+        <script type="text/javascript" th:src="@{/js/moment.min.js}"></script>
+        <!-- Waypoints Js -->
+        <script type="text/javascript" th:src="@{/js/jquery.waypoints.min.js}"></script>
+        <!-- Scroll Up Js -->
+        <script type="text/javascript" th:src="@{/js/jquery.scrollUp.min.js}"></script>
+        <!-- Full Calender Js -->
+        <script type="text/javascript" th:src="@{/js/fullcalendar.min.js}"></script>
+        <!-- Chart Js -->
+        <script type="text/javascript" th:src="@{/js/Chart.min.js}"></script>
+        <!-- Custom Js -->
+        <script type="text/javascript" th:src="@{/js/main.js}"></script>
+    </body>
+</html>

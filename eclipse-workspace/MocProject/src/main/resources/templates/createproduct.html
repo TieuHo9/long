@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<html>
+    <th:block th:include="{/head :: head}"></th:block>
+
+    <body>
+      <div id="wrapper" class="wrapper bg-ash">
+        <!-- Header Menu Area Start Here -->
+        <header th:replace="header :: header"></header>
+        <!-- Header Menu Area End Here -->
+        <!-- Page Area Start Here -->
+        <div class="dashboard-page-one">
+          <!-- Sidebar Area Start Here -->
+          <div th:include="sidebar :: sidebar"></div>
+          <!-- Sidebar Area End Here -->
+          <div class="dashboard-content-one">
+            <!-- Breadcubs Area Start Here -->
+            <div class="breadcrumbs-area">
+              <h3>Sản phẩm</h3>
+              <ul>
+                <li>
+                  <a href="home.html">Trang chủ</a>
+                </li>
+                <li>Thêm sản phẩm</li>
+              </ul>
+            </div>
+            <!-- Breadcubs Area End Here -->
+            <!-- Admit Form Area Start Here -->
+            <div class="card height-auto">
+              <div class="card-body">
+                <div class="heading-layout1">
+                  <div class="item-title">
+                    <h3></h3>
+                  </div>
+                  <div class="dropdown">
+                    <div class="dropdown-menu dropdown-menu-right">
+                    </div>
+                  </div>
+                </div>
+                <form class="new-added-form" action="insert.htm" commandName="newProduct">
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-12 form-group">
+                      <label>Tên sản phẩm</label>
+                      <input type="text" path="productName" class="form-control"/>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-12 form-group">
+                      <label>Giá</label>
+                      <input type="text" path="price" class="form-control"/>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-12 form-group">
+                      <label>Thương hiệu</label>
+                      <input type="text" path="brand" class="form-control"/>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-12 form-group">
+                      <label>Mô tả</label>
+                      <input type="text" path="description" class="form-control"/>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-12 form-group">
+                      <label>Ảnh</label>
+                      <input type="text" path="image" class="form-control"/>
+                    </div>
+                    <div class="col-12 form-group mg-t-12">
+                      <button type="submit" name="smb" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Thêm mới</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- Admit Form Area End Here -->
+          </div>
+        </div>
+        <!-- Page Area End Here -->
+      </div>
+      <!-- jquery-->
+        <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+        <!-- Plugins js -->
+        <script type="text/javascript" th:src="@{/js/plugins.js}"></script>
+        <!-- Popper js -->
+        <script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+        <!-- Bootstrap js -->
+        <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+        <!-- Counterup Js -->
+        <script type="text/javascript" th:src="@{/js/jquery.counterup.min.js}"></script>
+        <!-- Moment Js -->
+        <script type="text/javascript" th:src="@{/js/moment.min.js}"></script>
+        <!-- Waypoints Js -->
+        <script type="text/javascript" th:src="@{/js/jquery.waypoints.min.js}"></script>
+        <!-- Scroll Up Js -->
+        <script type="text/javascript" th:src="@{/js/jquery.scrollUp.min.js}"></script>
+        <!-- Full Calender Js -->
+        <script type="text/javascript" th:src="@{/js/fullcalendar.min.js}"></script>
+        <!-- Chart Js -->
+        <script type="text/javascript" th:src="@{/js/Chart.min.js}"></script>
+        <!-- Custom Js -->
+        <script type="text/javascript" th:src="@{/js/main.js}"></script>
+    </body>
+</html>
+
