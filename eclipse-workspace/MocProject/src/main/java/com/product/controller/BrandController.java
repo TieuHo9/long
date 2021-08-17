@@ -61,7 +61,7 @@ public class BrandController {
 		
 	}
 	
-	@PostMapping(value = "{brandId}/products/{products}/add")
+	@PostMapping(value = "{brandId}/products/{productsId}/add")
 	public ResponseEntity<BrandDto> addProductsToBrand(@PathVariable final Long brandId,@PathVariable final Long productsId){
 		Brand brand = brandService.addProductsToBrand(brandId, productsId);
 		return new ResponseEntity<>(BrandDto.from(brand), HttpStatus.OK);

@@ -45,7 +45,7 @@ public class ProductsService {
 	public Products editProducts(Long id, Products products) {
 		Products productsToEdit = getProducts(id);
 		productsToEdit.setName(products.getName());
-		//productsToEdit.setBrand_id(products.getBrand_id());
+//		productsToEdit.setBrand_id(products.getBrand_id());
 		productsToEdit.setPrice(products.getPrice());
 		productsToEdit.setSize(products.getSize());
 		productsToEdit.setStatus(products.getStatus());

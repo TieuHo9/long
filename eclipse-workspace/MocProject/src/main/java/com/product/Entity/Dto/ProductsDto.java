@@ -18,7 +18,7 @@ public class ProductsDto {
 	private String status;
 	private String size;
 	private String color;
-	private int brand_id;
+//	private int brand_id;
 
 	private PlainProductsDto plainProductsDto;
 
@@ -27,8 +27,8 @@ public class ProductsDto {
 	}
 	  
 	 public void setId(Long id) { this.id = id; }
-	 public int getBrand_id() { return brand_id; }
-	 //public void setBrand_id(int brand_id) { this.brand_id = brand_id; }
+//	 public int getBrand_id() { return brand_id; }
+//	 public void setBrand_id(int brand_id) { this.brand_id = brand_id; }
 	 public String getName() { return name; }
 	 public void setName(String name) { this.name = name; }
 	 public int getPrice() { return price; }
@@ -49,6 +49,7 @@ public class ProductsDto {
 		productsDto.setStatus(products.getStatus());
 		productsDto.setSize(products.getSize());
 		productsDto.setColor(products.getColor());
+//		productsDto.setBrand_id(products.getBrand_id());
 		if (Objects.nonNull(products.getBrand())) {
 			productsDto.setPlainProductsDto(PlainProductsDto.from(products.getBrand()));
 		}

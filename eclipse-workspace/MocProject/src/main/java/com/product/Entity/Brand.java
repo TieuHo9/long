@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,8 +38,8 @@ public class Brand implements Serializable{
 	
 	@Column(name = "name")
 	private String name;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "brand_id")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "brand_id", nullable = false)
 	
 	private List<Products> products = new ArrayList<>();
 	
