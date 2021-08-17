@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import javax.transaction.Transactional;
-
+import com.product.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,9 @@ import com.product.repository.BrandRepository;
 
 @Service
 public class BrandService {
+	@Autowired
 	private final BrandRepository brandRepository;
+	@Autowired
 	private final ProductsService productsService;
 	
 	@Autowired
