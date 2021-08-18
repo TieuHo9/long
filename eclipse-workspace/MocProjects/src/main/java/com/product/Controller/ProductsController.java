@@ -62,8 +62,13 @@ public class ProductsController {
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<ProductsDto> deleteProducts(@PathVariable final Long id){
-		Products products = productsService.deleteProducts(id);
-		return new ResponseEntity<>(ProductsDto.from(products), HttpStatus.OK);
+	public ResponseEntity<String> deleteProducts(@PathVariable final Long id){
+		try {
+			productsService.deleteProducts(id);
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+
+		}
+		return new ResponseEntity<>("Delete success", null , HttpStatus.OK);
 	}
 }

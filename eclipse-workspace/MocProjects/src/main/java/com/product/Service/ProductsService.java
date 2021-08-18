@@ -28,7 +28,7 @@ public class ProductsService {
 	public Products addProducts(ProductsDto productsDto) {
 		Products products = new Products();
 		products.setName(productsDto.getName());
-		// Ở entity ko gọi đc repo nên viết hàm này ở service luôn
+		// Ở entity ko  gọi đc repo nên viết hàm này ở service luôn
 		products.setBrand(repo.findById(productsDto.getBrand_id()).get());
 		products.setPrice(productsDto.getPrice());
 		products.setStatus(productsDto.getStatus());
@@ -49,11 +49,12 @@ public class ProductsService {
 		return productsRepository.findById(id)
 				.orElseThrow(() -> new ProductsNotFoundException(id));
 	}
-	
-	public Products deleteProducts(Long id) {
-		Products products = getProducts(id);
-		productsRepository.delete(products);
-		return products;
+	@Transactional
+	public void deleteProducts(Long id) throws Exception{
+		// Kiểm tra xem user đó có trong db ko, ko có thì ra lỗi luôn, ko cần xóa nữa
+		productsRepository.findById(id).orElseThrow(() -> new Exception("this products not found"));
+		productsRepository.deleteById(id);
+
 	}
 	@Transactional
 	public Products editProducts(Long id, ProductsDto products) {

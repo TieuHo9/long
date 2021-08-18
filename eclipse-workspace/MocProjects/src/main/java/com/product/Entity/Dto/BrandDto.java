@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.util.CollectionUtils;
+
 import com.product.Entity.Brand;
 
 import lombok.Getter;
@@ -51,7 +53,13 @@ public class BrandDto {
 		BrandDto brandDto = new BrandDto();
 		brandDto.setId(brand.getId());
 		brandDto.setName(brand.getName());
-		brandDto.setProductsDto(brand.getProducts().stream().map(ProductsDto::from).collect(Collectors.toList()));
+		// Trường hợp tạo mới brand thì chưa có products -> can check empty truoc khi stream
+		if(!CollectionUtils.isEmpty(brand.getProducts())) {
+
+			brandDto.setProductsDto(brand.getProducts()
+					.stream().map(ProductsDto::from)
+					.collect(Collectors.toList()));
+		}
 		return brandDto;
 		
 		
