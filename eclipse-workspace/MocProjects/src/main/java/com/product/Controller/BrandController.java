@@ -32,7 +32,7 @@ public class BrandController {
 	
 	@PostMapping
 	public ResponseEntity<BrandDto> addBrand(@RequestBody final BrandDto brandDto){
-		Brand brand = brandService.addBrand(Brand.from(brandDto));
+		Brand brand = brandService.addBrand(brandDto);
 		return new ResponseEntity<>(BrandDto.from(brand), HttpStatus.OK);
 	}
 	
@@ -49,14 +49,19 @@ public class BrandController {
 		return new ResponseEntity<>(BrandDto.from(brand), HttpStatus.OK);
 	}
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<BrandDto> deleteBrand(@PathVariable final Long id){
-		Brand brand = brandService.deleteBrand(id);
-		return new ResponseEntity<>(BrandDto.from(brand), HttpStatus.OK);
+	public ResponseEntity<String> deleteBrand(@PathVariable final Long id){
+		try {
+			brandService.deleteBrand(id);
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+		return new ResponseEntity<>("Delete success", null , HttpStatus.OK);
+
 	}
 	
 	@PutMapping(value="/{id}")
 	public ResponseEntity<BrandDto> editBrand(@PathVariable final Long id, @RequestBody final BrandDto brandDto){
-		Brand brand = brandService.editBrand(id, Brand.from(brandDto));
+		Brand brand = brandService.editBrand(id, brandDto);
 		return new ResponseEntity<>(BrandDto.from(brand), HttpStatus.OK);
 		
 	}

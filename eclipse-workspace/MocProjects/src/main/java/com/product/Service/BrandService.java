@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.product.Entity.Brand;
 import com.product.Entity.Products;
+import com.product.Entity.Dto.BrandDto;
 import com.product.Entity.Exception.BrandNotFoundException;
 import com.product.Entity.Exception.ProductsIdReadyEcception;
 import com.product.Repository.BrandRepository;
@@ -36,7 +37,9 @@ public class BrandService {
 		this.productRepository = productsRepository;
 	}
 	
-	public Brand addBrand(Brand brand) {
+	public Brand addBrand(BrandDto brandDto) {
+		Brand brand = new Brand();
+		brand.setName(brandDto.getName());
 		return brandRepository.save(brand);
 	}
 	
@@ -47,10 +50,11 @@ public class BrandService {
 	}
 	
 	@Transactional
-	public Brand deleteBrand(Long id) {
-		Brand brand = getBrand(id); 
+	public void deleteBrand(Long id) throws Exception{
+		// Kiểm tra xem user đó có trong db ko, ko có thì ra lỗi luôn, ko cần xóa nữa
+		brandRepository.findById(id).orElseThrow(() -> new Exception("this brand not found"));
+		
 		brandRepository.deleteById(id);
-		return brand;
 	}
 	
 	public Brand getBrand(Long id) {
@@ -66,10 +70,10 @@ public class BrandService {
 		return brand;
 	}
 	@Transactional
-	public Brand editBrand(Long id, Brand brand) {
+	public Brand editBrand(Long id, BrandDto brandDto) {
 		Brand brandToEdit = getBrand(id);
-		brandToEdit.setName(brand.getName());
-		return brandToEdit;
+		brandToEdit.setName(brandDto.getName());
+		return brandRepository.save(brandToEdit);
 	}
 	@Transactional
 	public Brand addProductsToBrand(Long productsId, Long brandId) {
