@@ -58,15 +58,15 @@ public class BrandController {
 		
 	}
 	
-//	@PostMapping(value = "{brandId}/products/{products}/add")
-//	public ResponseEntity<BrandDto> addProductsToBrand(@PathVariable final Long brandId,@PathVariable final Long productsId){
-//		return new ResponseEntity<>(brandService.addProductsToBrand(brandId, productsId), HttpStatus.OK);
-//	}
-//	
-//	@DeleteMapping(value = "{brandId}/products/{productsId}/remove")
-//	public ResponseEntity<BrandDto> removeProductsFromBrand(@PathVariable final Long brandId,@PathVariable final Long productsId){
-//		return new ResponseEntity<>(brandService.removeProductsFromBrand(brandId, productsId), HttpStatus.OK);
-//	}
+	@PostMapping(value = "{brandId}/products/{products}/add")
+	public ResponseEntity<BrandDto> addProductsToBrand(@PathVariable final Long brandId,@PathVariable final Long productsId){
+		return new ResponseEntity<>(brandService.addProductsToBrand(brandId, productsId), HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value = "{brandId}/products/{productsId}/remove")
+	public ResponseEntity<BrandDto> removeProductsFromBrand(@PathVariable final Long brandId,@PathVariable final Long productsId){
+		return new ResponseEntity<>(brandService.removeProductsFromBrand(brandId, productsId), HttpStatus.OK);
+	}
 	 
 	
 }
