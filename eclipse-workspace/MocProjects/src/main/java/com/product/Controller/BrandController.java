@@ -20,23 +20,17 @@ import com.product.Entity.Dto.BrandDto;
 import com.product.Service.BrandService;
 
 @RestController
-@RequestMapping("/brand/")
+@RequestMapping("/brand")
 public class BrandController {
-
-	private final BrandService brandService;
-	
 	@Autowired
-	public BrandController(BrandService brandService) {
-		this.brandService = brandService;
-	}
-	
+	private BrandService brandService;
+
 	@PostMapping
 	public ResponseEntity<BrandDto> addBrand(@RequestBody final BrandDto brandDto){
-		Brand brand = brandService.addBrand(brandDto);
-		return new ResponseEntity<>(BrandDto.from(brand), HttpStatus.OK);
+		return new ResponseEntity<>(brandService.addBrand(brandDto), HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/")
+	@GetMapping
 	public ResponseEntity<List<BrandDto>> getBrand(){
 		List<Brand> brand = brandService.getBrand();
 		List<BrandDto> brandDto = brand.stream().map(BrandDto::from).collect(Collectors.toList());
@@ -45,8 +39,7 @@ public class BrandController {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<BrandDto> getBrand(@PathVariable final Long id){
-		Brand brand = brandService.getBrand(id);
-		return new ResponseEntity<>(BrandDto.from(brand), HttpStatus.OK);
+		return new ResponseEntity<>(brandService.getBrand(id), HttpStatus.OK);
 	}
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<String> deleteBrand(@PathVariable final Long id){
@@ -61,22 +54,19 @@ public class BrandController {
 	
 	@PutMapping(value="/{id}")
 	public ResponseEntity<BrandDto> editBrand(@PathVariable final Long id, @RequestBody final BrandDto brandDto){
-		Brand brand = brandService.editBrand(id, brandDto);
-		return new ResponseEntity<>(BrandDto.from(brand), HttpStatus.OK);
+		return new ResponseEntity<>(brandService.editBrand(id, brandDto), HttpStatus.OK);
 		
 	}
 	
-	@PostMapping(value = "{brandId}/products/{products}/add")
-	public ResponseEntity<BrandDto> addProductsToBrand(@PathVariable final Long brandId,@PathVariable final Long productsId){
-		Brand brand = brandService.addProductsToBrand(brandId, productsId);
-		return new ResponseEntity<>(BrandDto.from(brand), HttpStatus.OK);
-	}
-	
-	@DeleteMapping(value = "{brandId}/products/{productsId}/remove")
-	public ResponseEntity<BrandDto> removeProductsFromBrand(@PathVariable final Long brandId,@PathVariable final Long productsId){
-		Brand brand = brandService.removeProductsFromBrand(brandId, productsId);
-		return new ResponseEntity<>(BrandDto.from(brand), HttpStatus.OK);
-	}
+//	@PostMapping(value = "{brandId}/products/{products}/add")
+//	public ResponseEntity<BrandDto> addProductsToBrand(@PathVariable final Long brandId,@PathVariable final Long productsId){
+//		return new ResponseEntity<>(brandService.addProductsToBrand(brandId, productsId), HttpStatus.OK);
+//	}
+//	
+//	@DeleteMapping(value = "{brandId}/products/{productsId}/remove")
+//	public ResponseEntity<BrandDto> removeProductsFromBrand(@PathVariable final Long brandId,@PathVariable final Long productsId){
+//		return new ResponseEntity<>(brandService.removeProductsFromBrand(brandId, productsId), HttpStatus.OK);
+//	}
 	 
 	
 }

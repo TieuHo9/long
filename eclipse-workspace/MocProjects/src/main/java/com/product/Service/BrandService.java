@@ -15,6 +15,7 @@ import com.product.Entity.Products;
 import com.product.Entity.Dto.BrandDto;
 import com.product.Entity.Exception.BrandNotFoundException;
 import com.product.Entity.Exception.ProductsIdReadyEcception;
+import com.product.Entity.Exception.ProductsNotFoundException;
 import com.product.Repository.BrandRepository;
 import com.product.Repository.ProductsRepository;
 
@@ -22,25 +23,16 @@ import com.product.Repository.ProductsRepository;
 @Service
 public class BrandService {
 	@Autowired
-	private final BrandRepository brandRepository;
+	BrandRepository brandRepository;
 	
 	@Autowired
-	private final ProductsRepository productRepository;
+	ProductsRepository productRepository;
 	
-	@Autowired
-	private final ProductsService productsService;
-	
-	@Autowired
-	public BrandService(BrandRepository brandRepository, ProductsService productsService, ProductsRepository productsRepository) {
-		this.brandRepository = brandRepository;
-		this.productsService = productsService;
-		this.productRepository = productsRepository;
-	}
-	
-	public Brand addBrand(BrandDto brandDto) {
+	public BrandDto addBrand(BrandDto brandDto) {
 		Brand brand = new Brand();
 		brand.setName(brandDto.getName());
-		return brandRepository.save(brand);
+		brand = brandRepository.save(brand);
+		return BrandDto.from(brand);
 	}
 	
 	public List<Brand> getBrand(){
@@ -57,40 +49,42 @@ public class BrandService {
 		brandRepository.deleteById(id);
 	}
 	
-	public Brand getBrand(Long id) {
+	public BrandDto getBrand(Long id) {
 		// Get brand
 		Brand brand = brandRepository.findById(id)
 				.orElseThrow(() -> new BrandNotFoundException(id));
+		
 		
 		// Get list product of brand
 //		List<Products> productList = productRepository.findByBrandId(brand.getId());
 		
 //		brand.setProducts(productList);
 		
-		return brand;
+		return BrandDto.from(brand);
 	}
 	@Transactional
-	public Brand editBrand(Long id, BrandDto brandDto) {
-		Brand brandToEdit = getBrand(id);
+	public BrandDto editBrand(Long id, BrandDto brandDto) {
+		Brand brandToEdit = brandRepository.findById(id).orElseThrow(() -> new BrandNotFoundException(id));
 		brandToEdit.setName(brandDto.getName());
-		return brandRepository.save(brandToEdit);
+		brandToEdit = brandRepository.save(brandToEdit);
+		return BrandDto.from(brandToEdit);
 	}
 	@Transactional
-	public Brand addProductsToBrand(Long productsId, Long brandId) {
-		Brand brand = getBrand(brandId);
-		Products products = productsService.getProducts(productsId);
+	public BrandDto addProductsToBrand(Long productsId, Long brandId) {
+		Brand brand = brandRepository.findById(brandId).orElseThrow(() -> new BrandNotFoundException(brandId));
+		Products products = productRepository.findById(productsId).orElseThrow(() -> new ProductsNotFoundException(productsId));
 		if(Objects.nonNull(products.getBrand())) {
 			throw new ProductsIdReadyEcception(productsId,
 					products.getBrand().getId());	
 		}
 		brand.addProducts(products);
-		return brand;
+		return BrandDto.from(brand);
 	}
 	@Transactional
-	public Brand removeProductsFromBrand(Long brandId, Long productsId) {
-		Brand brand = getBrand(brandId);
-		Products products = productsService.getProducts(productsId);
+	public BrandDto removeProductsFromBrand(Long brandId, Long productsId) {
+		Brand brand = brandRepository.findById(brandId).orElseThrow(() -> new BrandNotFoundException(brandId));
+		Products products = productRepository.findById(productsId).orElseThrow(() -> new BrandNotFoundException(productsId));
 		brand.removeProducts(products);
-		return brand;
+		return BrandDto.from(brand);
 	}
 }
